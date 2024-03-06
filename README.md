@@ -82,3 +82,42 @@ Wed Mar  6 11:59:03 2024
 ```
 
 Amazing! The GEX44 is now ready to fine-tune nice models 🎉
+
+# User account
+
+We create a new (unpriviliged) user and add it to the `sudoers` list:
+
+```bash
+$ useradd -m -g users -s /bin/bash stefan
+$ passwd stefan # Set a nice password here
+$ usermod -aG sudo stefan
+```
+
+Then login with the newly created user.
+
+# PyTorch installation
+
+PyTorch is installed in a fresh virtual environment (via `venv`), as this is the easiest way to get it running.
+Possible alternatives are e.g. Anaconda or using Docker with NVIDIA support and e.g. an [NVIDIA PyTorch image](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch)).
+
+The following steps will install a perfectly working PyTorch installation with GPU support:
+
+```bash
+$ sudo apt install python3-venv
+$ python3 -m venv venvs/dev
+$ source venvs/dev/bin/activate
+```
+
+Now let's test if CUDA is available via:
+
+```bash
+$ python3
+Python 3.11.6 (main, Oct  8 2023, 05:06:43) [GCC 13.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import torch
+>>> torch.cuda.is_available()
+True
+>>>
+```
+
+Now we can start installing more libraries and fine-tuning own models!
