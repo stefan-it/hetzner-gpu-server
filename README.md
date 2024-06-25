@@ -18,7 +18,7 @@ I will use the GPU mainly for fine-tuning NLP models with the awesome [Flair](ht
 After using Ubuntu 22.04 (installed from rescue console) the following steps are done in the initial setup stage:
 
 * Updating and upgrading all Ubuntu 22.04 packages
-* Upgrade from Ubuntu 22.04 to 23.10
+* Upgrade from Ubuntu 22.04 to 24.04
 * Install CUDA and NVIDIA drivers
 
 On commandline it looks like:
@@ -26,26 +26,17 @@ On commandline it looks like:
 ```bash
 $ apt update && apt upgrade -y
 $ reboot # To make sure ;)
-$ do-release-upgrade # It is not working, because 23.10 is no LTS, so... set "PROMPT" to "normal" in:
-$ vim /etc/update-manager/release-upgrades
-$ do-release-upgrade
+$ do-release-upgrade -d
 ```
 
-Now we have a working Ubuntu 23.10 installation. Now all NVIDIA-related stuff is installed:
+Follow all upgrade instructions and then we have a working Ubuntu 24.04 installation.
+Now all NVIDIA-related stuff is installed:
 
 ```bash
 $ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.1-1_all.deb
 $ dpkg -i cuda-keyring_1.1-1_all.deb
 $ apt-get update
-$ apt-get -y install cuda-toolkit-12-4
-```
-
-Ah! It is not working, due to missing `libtinfo5`, so we download and install it manually:
-
-```bash
-$ wget http://security.ubuntu.com/ubuntu/pool/universe/n/ncurses/libtinfo5_6.4-2ubuntu0.1_amd64.deb
-$ dpkg -i libtinfo5_6.4-2ubuntu0.1_amd64.deb
-$ sudo apt-get -y install cuda-toolkit-12-4
+$ apt-get -y install cuda-toolkit-12-5
 ```
 
 After that we install NVIDIA drivers and reboot our nice GEX44:
@@ -59,19 +50,19 @@ Now let's see if it was working:
 
 ```bash
 $ nvidia-smi
-Wed Mar  6 11:59:03 2024       
+Wed Jun 26 00:46:20 2024
 +-----------------------------------------------------------------------------------------+
-| NVIDIA-SMI 550.54.14              Driver Version: 550.54.14      CUDA Version: 12.4     |
+| NVIDIA-SMI 555.42.02              Driver Version: 555.42.02      CUDA Version: 12.5     |
 |-----------------------------------------+------------------------+----------------------+
 | GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
 | Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
 |                                         |                        |               MIG M. |
 |=========================================+========================+======================|
 |   0  NVIDIA RTX 4000 SFF Ada ...    Off |   00000000:01:00.0 Off |                  Off |
-| 30%   31C    P8              5W /   70W |       1MiB /  20475MiB |      0%      Default |
+| 33%   58C    P8              7W /   70W |       2MiB /  20475MiB |      0%      Default |
 |                                         |                        |                  N/A |
 +-----------------------------------------+------------------------+----------------------+
-                                                                                         
+
 +-----------------------------------------------------------------------------------------+
 | Processes:                                                                              |
 |  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
@@ -106,18 +97,14 @@ The following steps will install a perfectly working PyTorch installation with G
 $ sudo apt install python3-venv
 $ python3 -m venv venvs/dev
 $ source venvs/dev/bin/activate
+$ pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 ```
 
 Now let's test if CUDA is available via:
 
 ```bash
-$ python3
-Python 3.11.6 (main, Oct  8 2023, 05:06:43) [GCC 13.2.0] on linux
-Type "help", "copyright", "credits" or "license" for more information.
->>> import torch
->>> torch.cuda.is_available()
+$ python3 -c "import torch; print(torch.cuda.is_available())"
 True
->>>
 ```
 
 Now we can start installing more libraries and fine-tuning own models!
