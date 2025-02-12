@@ -33,10 +33,10 @@ Follow all upgrade instructions and then we have a working Ubuntu 24.04 installa
 Now all NVIDIA-related stuff is installed:
 
 ```bash
-$ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.1-1_all.deb
+$ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/cuda-keyring_1.1-1_all.deb
 $ dpkg -i cuda-keyring_1.1-1_all.deb
 $ apt-get update
-$ apt-get -y install cuda-toolkit-12-5
+$ apt-get -y install cuda-toolkit-12-6
 ```
 
 After that we install NVIDIA drivers and reboot our nice GEX44:
@@ -50,9 +50,9 @@ Now let's see if it was working:
 
 ```bash
 $ nvidia-smi
-Wed Jun 26 00:46:20 2024
+Wed Feb 12 21:27:38 2025       
 +-----------------------------------------------------------------------------------------+
-| NVIDIA-SMI 555.42.02              Driver Version: 555.42.02      CUDA Version: 12.5     |
+| NVIDIA-SMI 570.86.15              Driver Version: 570.86.15      CUDA Version: 12.8     |
 |-----------------------------------------+------------------------+----------------------+
 | GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
 | Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
