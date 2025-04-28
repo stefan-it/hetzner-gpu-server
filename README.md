@@ -4,6 +4,8 @@ This repository hosts my cheatsheet for Hetzner GPU Server Setup. Hopefully, I c
 
 I opened the [discussion section](https://github.com/stefan-it/hetzner-gpu-server/discussions) so that other GEX44 users can discuss various things.
 
+**Update**: I no longer have a Hetzner GPU Server, as I have built my own GPU Workstation at home, see [this post](https://huggingface.co/posts/stefan-it/513898057053383). Thus, this repo here is no longer maintained and it is archived now.
+
 ## GEX44
 
 In March 2024, Hetzner thanksfully released a new [generation of GPU servers](https://www.hetzner.com/press-release/new-gpu-server/), after their [first GPU server](https://web.archive.org/web/20210613172423/https://www.hetzner.com/news/blitzschnell-gestochen-scharf-neuer-dedicated-root-server-ex51-ssd-gpu/) back in March 2017!
